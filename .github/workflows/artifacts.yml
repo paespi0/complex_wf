@@ -3,13 +3,7 @@
 name: Artifacts
 
 # Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [push]
 
 env:
   ARTIFACT_NAME: artifact_name
@@ -26,10 +20,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out code
         uses: actions/checkout@v3
-
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           # Artifact name
-          name: $ARTIFACT_NAME # optional, default is artifact
+          name: ${{ env.ARTIFACT_NAME }}
           # A file, directory or wildcard pattern that describes what to upload
+          path: .
